@@ -8,4 +8,4 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(cors());
 
-app.listen(port, console.log("http://localhost:", port));
+app.listen(port, console.log('http://localhost:3838/produtos'));
