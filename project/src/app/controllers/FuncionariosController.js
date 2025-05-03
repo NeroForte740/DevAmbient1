@@ -15,16 +15,14 @@ class FuncionariosController {
   }
   // Cria um registro
   async create(req, res) {
-    const { id, created_at, name, email, b_date } = req.body;
+    const { name, email, password, level } = req.body;
     const { data, error } = await cliente.supabase
       .from("funcionarios")
       .insert({
-        func_id: id,
         func_name: name,
         func_email: email,
         func_password: password,
         func_level: level,
-        created_at: created_at,
       })
       .select();
     return res.send(data);
@@ -32,16 +30,14 @@ class FuncionariosController {
   // Atualiza um registro
   async update(req, res) {
     const id = parseInt(req.params.id);
-    const { created_at, name, email, b_date } = req.body;
+    const { name, email, password, level } = req.body;
     const { data, error } = await cliente.supabase
       .from("funcionarios")
       .update({
-        func_id: id,
         func_name: name,
         func_email: email,
         func_password: password,
         func_level: level,
-        created_at: created_at,
       })
       .eq("func_id", id)
       .select();

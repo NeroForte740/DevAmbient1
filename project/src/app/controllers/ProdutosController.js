@@ -15,15 +15,15 @@ class ProdutosController {
   }
   // Cria um registro
   async create(req, res) {
-    const { id, created_at, name, email, b_date } = req.body;
+    const { name, price, type, desc } = req.body;
     const { data, error } = await cliente.supabase
       .from("produtos")
       .insert({
-        prod_id,
-        prod_name,
-        prod_price,
-        prod_type,
-        prod_desc,
+        prod_id, //auto-increment
+        prod_name: name,
+        prod_price: price,
+        prod_type: type,
+        prod_desc: desc,
       })
       .select();
     return res.send(data);
@@ -31,15 +31,15 @@ class ProdutosController {
   // Atualiza um registro
   async update(req, res) {
     const id = parseInt(req.params.id);
-    const { created_at, name, email, b_date } = req.body;
+    const { name, price, type, desc } = req.body;
     const { data, error } = await cliente.supabase
       .from("produtos")
       .update({
         prod_id,
-        prod_name,
-        prod_price,
-        prod_type,
-        prod_desc,
+        prod_name: name,
+        prod_price: price,
+        prod_type: type,
+        prod_desc: desc,
         created_at: created_at,
       })
       .eq("prod_id", id)

@@ -15,17 +15,18 @@ class PedidosController {
   }
   // Cria um registro
   async create(req, res) {
-    const { id, created_at, name, email, b_date } = req.body;
+    const { id, description, totalprice, status_prep, status_pag, client, priori } = req.body;
     const { data, error } = await cliente.supabase
       .from("pedidos")
       .insert({
-        ped_id,
-        ped_description,
-        ped_totalprice,
-        ped_status_preparo,
-        ped_status_pag,
-        ped_cliente,
-        ped_priori
+        ped_id, //autoincrement
+        ped_description: description,
+        ped_totalprice: totalprice,
+        ped_status_preparo: status_prep,
+        ped_status_pag: status_pag,
+        ped_cliente: client,
+        ped_priori: priori,
+
       })
       .select();
     return res.send(data);
@@ -33,18 +34,16 @@ class PedidosController {
   // Atualiza um registro
   async update(req, res) {
     const id = parseInt(req.params.id);
-    const { created_at, name, email, b_date } = req.body;
+    const { description, totalprice, status_prep, status_pag, client, priori } = req.body;
     const { data, error } = await cliente.supabase
       .from("pedidos")
       .update({
-        ped_id,
-        ped_description,
-        ped_totalprice,
-        ped_status_preparo,
-        ped_status_pag,
-        ped_cliente,
-        ped_priori,
-        created_at: created_at,
+        ped_description: description,
+        ped_totalprice: totalprice,
+        ped_status_preparo: status_prep,
+        ped_status_pag: status_pag,
+        ped_cliente: client,
+        ped_priori: priori,
       })
       .eq("ped_id", id)
       .select();
